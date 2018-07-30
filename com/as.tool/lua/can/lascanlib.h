@@ -60,6 +60,7 @@ extern const Can_DeviceOpsType can_socketwin_ops;
 #if !defined(__AS_PY_CAN__) && !defined(__AS_CAN_BUS__)
 int luai_can_write (lua_State *L);
 int luai_can_read  (lua_State *L);
+int luai_can_get   (lua_State *L);
 int luai_can_open  (lua_State *L);
 int luai_can_close (lua_State *L);
 int luai_can_log   (lua_State *L);

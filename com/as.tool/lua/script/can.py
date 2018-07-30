@@ -20,7 +20,7 @@ try:
 except:
     from AS import *
 
-__all__ = ['can_open','can_write','can_read','can_close']
+__all__ = ['can_open','can_write','can_read','can_get','can_close']
 
 __can__ = can()
 
@@ -42,6 +42,20 @@ def can_write(busid,canid,data):
 def can_read(busid,canid):
     ''' can request read a can frame from <canid> queue of <busid>'''
     result,canid,dlc,cstr= __can__.read(busid,canid)
+    
+    if(result):
+        data = []
+        for i in range(len(cstr)>>1):
+            data.append(int(cstr[2*i:2*i+2],16))
+        assert(dlc == len(data))
+    else:
+        data = None
+
+    return result,canid,data
+
+def can_get(busid):
+    ''' can request read a can frame from the queue of <busid>'''
+    result,canid,dlc,cstr= __can__.get(busid)
     
     if(result):
         data = []

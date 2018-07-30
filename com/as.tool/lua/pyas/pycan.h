@@ -27,6 +27,7 @@ void luai_canlib_close(void);
 int can_open(unsigned long busid,const char* device,unsigned long port, unsigned long baudrate);
 int can_write(unsigned long busid,unsigned long canid,unsigned long dlc,unsigned char* data);
 int can_read(unsigned long busid,unsigned long canid,unsigned long *p_canid,unsigned long *dlc,unsigned char** data);
+int can_get(unsigned long busid,unsigned long *p_canid,unsigned long *dlc,unsigned char** data);
 int can_close(unsigned long busid);
 
 }
@@ -57,6 +58,11 @@ public:
 	int read(unsigned long busid,unsigned long canid,unsigned long *p_canid, unsigned long *dlc,unsigned char** data)
 	{
 		return can_read(busid,canid,p_canid,dlc,data);
+	}
+
+	int get(unsigned long busid,unsigned long *p_canid, unsigned long *dlc,unsigned char** data)
+	{
+		return can_get(busid,p_canid,dlc,data);
 	}
 
 	int close(unsigned long busid)
